@@ -1,5 +1,8 @@
 <script setup lang="ts">
+import { useRouter } from 'vue-router'
 import HelloWorld from './components/HelloWorld.vue'
+
+const router = useRouter()
 </script>
 
 <template>
@@ -11,6 +14,9 @@ import HelloWorld from './components/HelloWorld.vue'
       <img src="./assets/vue.svg" class="logo vue" alt="Vue logo" />
     </a>
   </div>
+  <button @click="() => router.push({path: '/home' })">首页</button>
+  <button @click="() => router.push({ path: '/mine'})">个人中心</button>
+  <router-view />
   <HelloWorld msg="Vite + Vue" />
 </template>
 
