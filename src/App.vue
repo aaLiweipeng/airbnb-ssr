@@ -14,8 +14,15 @@ const router = useRouter()
       <img src="./assets/vue.svg" class="logo vue" alt="Vue logo" />
     </a>
   </div>
+
+  <!-- 触发路由（router-view）切换方式1 -->
   <button @click="() => router.push({path: '/home' })">首页</button>
   <button @click="() => router.push({ path: '/mine'})">个人中心</button>
+
+  <!-- 触发路由（router-view）切换方式2 -->
+  <router-link to="/home">首页</router-link>
+  <router-link to="/mine">个人中心</router-link>
+
   <router-view />
   <HelloWorld msg="Vite + Vue" />
 </template>
