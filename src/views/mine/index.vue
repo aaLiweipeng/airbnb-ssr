@@ -1,13 +1,13 @@
 <script setup lang="ts">
-import { useRoute, useRouter } from 'vue-router'
+import { useRouter } from 'vue-router'
 
 const router = useRouter()
-const route = useRoute()
+// const route = useRoute()
 </script>
 
 <template>
     个人中心
-    <button @click="() => router.push({name:'home', params: { id: 2 }})">跳转到首页</button>
+    <button @click="() => router.push({ name: 'home', params: { id: 2 } })">跳转到首页</button>
 </template>
 
 <style scoped></style>

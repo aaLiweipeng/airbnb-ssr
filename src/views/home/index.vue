@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { getCurrentInstance } from 'vue';
+import { getCurrentInstance } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
 
 const router = useRouter()
@@ -11,8 +11,7 @@ proxy.$message.success('666666')
 
 <template>
     首页
-    <el-button @click="() => router.push({name:'mine', query: { id: 1 }})">跳转到个人中心</el-button>
+    <el-button @click="() => router.push({ name: 'mine', query: { id: 1 } })">跳转到个人中心</el-button>
 </template>
 
-<style scoped>
-</style>
+<style scoped></style>
