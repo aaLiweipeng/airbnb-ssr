@@ -20,6 +20,7 @@
       "@components/*": ["src/components/*"],
       "@style/*": ["src/style/*"],
       "@utils/*": ["src/utils/*"],
+      "@assets/*": ["src/assets/*"],
       "@router/*": ["src/router/*"]
     }
   },

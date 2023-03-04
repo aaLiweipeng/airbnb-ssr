@@ -12,6 +12,9 @@ proxy.$message.success('666666')
 <template>
     首页
     <el-button @click="() => router.push({ name: 'mine', query: { id: 1 } })">跳转到个人中心</el-button>
+    <div class="text">事实上事实上少时诵诗书是撒是撒是撒是撒是撒是撒是撒是撒是撒是撒是撒是撒是撒是撒是撒</div>
 </template>
 
-<style scoped></style>
+<style lang="scss" scoped>
+@import "@/assets/scss/home/index.scss";
+</style>

@@ -23,6 +23,7 @@
     "eslint-plugin-n": "^15.0.0",
     "eslint-plugin-promise": "^6.0.0",
     "eslint-plugin-vue": "^9.9.0",
+    "sass": "^1.58.3",
     "typescript": "*",
     "unplugin-auto-import": "^0.15.0",
     "unplugin-vue-components": "^0.24.0",

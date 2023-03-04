@@ -19,4 +19,14 @@ export default defineConfig({
   resolve: {
     alias: [{ find: "@", replacement: resolve(__dirname, "./src") }],
   },
+  css: {
+    preprocessorOptions: {
+      scss: {
+        additionalData: '@import "@/assets/scss/variable.scss";',
+      },
+      // styl: {
+      //   additionalData: `$injectedColor ?= orange`,
+      // },
+    },
+  },
 });
