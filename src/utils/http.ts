@@ -1,3 +1,10 @@
+/*
+ * @Descripttion: axios一层封装
+ * @Author: lwp
+ * @Date: 2023-03-05 01:38:30
+ * @LastEditTime: 2023-03-08 05:54:30
+ */
+
 import axios, { AxiosRequestConfig, AxiosResponse, InternalAxiosRequestConfig } from 'axios'
 const defaultConfig = {
   timeout: 5000,

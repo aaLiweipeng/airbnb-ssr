@@ -1,3 +1,9 @@
+/*
+ * @Descripttion: 
+ * @Author: lwp
+ * @Date: 2023-02-26 02:05:02
+ * @LastEditTime: 2023-03-08 05:54:13
+ */
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import { resolve } from "path";
