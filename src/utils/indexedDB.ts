@@ -61,7 +61,10 @@ export default class DB {
   
         for (const storeName in stores) { // 初始化 多个 ojectStore对象仓库【表】
           const { keyPath, indexs } = stores[storeName]
-          if (!result.objectStoreNames.contains(storeName)) { // 没有表则新建表
+
+          // onupgradeneeded 接收的 event实例中 有 objectStoreNames 数据表列表
+          // 列表中没有的表，即没新建过，则做 新建表 操作 --- createObjectStore
+          if (!result.objectStoreNames.contains(storeName)) {
 
             // createObjectStore：会返回 一个对象仓库 objectStore(即新建一个表)
             // storeName：对象仓库名【表名】
@@ -165,6 +168,7 @@ export default class DB {
 
   // 查询某一条数据【数据字段意义 同上】
   getItem(storeName: string, key: number | string) {
+    console.log('getItem storeName --- ', storeName)
     const store = this.db.transaction(storeName).objectStore(storeName)
 
     const request = store.get(key)

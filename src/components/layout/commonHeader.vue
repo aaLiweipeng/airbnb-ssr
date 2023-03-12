@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { ref, getCurrentInstance, defineAsyncComponent, onMounted } from 'vue'
-// import zhCn from 'element-plus/lib/locale/lang/zh-cn.js'
-// import en from 'element-plus/lib/locale/lang/en.js'
-// import { fetchLanguageApi } from '../../api/layout'
+import zhCn from 'element-plus/lib/locale/lang/zh-cn.js'
+import en from 'element-plus/lib/locale/lang/en.js'
+import { fetchLanguageApi, saveLanguageApi } from '@/api/layout'
 import { useI18n } from 'vue-i18n'
 import { useRouter } from 'vue-router'
 // import { userLogoutApi } from '@/api/login'
@@ -20,15 +20,20 @@ const activeIndex = ref('orders')
 const emit = defineEmits<{
   (e: 'changeLang', language: any): void
 }>()
-function handleSelect(e: any) {
-  // if (e === 'zh') {
 
+// 类型来自 el-menu 的 el-menu-item 的 index
+type SelectEventKey = 'zh' | 'en' | 'login' | 'logout' | 'orders' | 'records'
+function handleSelect(e: SelectEventKey) {
+  if (e === 'zh') {
+    saveLanguageApi(zhCn.name)
   //   store.dispatch('saveLanguage', zhCn)
-    // localeLanguage.value = e
-  // } else if (e === 'en') {
+    localeLanguage.value = e
+  } else if (e === 'en') {
+    saveLanguageApi(en.name)
   //   store.dispatch("saveLanguage", en)
-  //   localeLanguage.value = e
-  // } else if (e === 'login') {
+    localeLanguage.value = e
+  } 
+  // else if (e === 'login') {
   //   router.push({ name: 'login' })
   // } else if (e === 'logout') {
   //   // userLogout()
@@ -40,26 +45,31 @@ function handleSelect(e: any) {
   // console.log(e)
 }
 
-// Mock接口：获取当前语言包
-// function getLanguage() {
-//   fetchLanguageApi().then(res => {
-//     const { success, result } = res
-//     const { name } = result || {}
-//     if (success) {
-//       if (name === 'zh') {
-//         store.dispatch('saveLanguage', zhCn)
-//         localeLanguage.value = name
-//       } else if (name === 'en') {
-//         store.dispatch("saveLanguage", en)
-//         localeLanguage.value = name
-//       }
-//       console.log('获取当前语言包成功')
-//     }
-//   })
-// }
-// onMounted(() => {
-//   getLanguage()
-// })
+// Mock接口：获取语言包配置
+function getLanguage() {
+  fetchLanguageApi().then(res => {
+    const { success, result } = res
+    const { name } = result || {}
+  
+    if (success) {
+      if (name === 'zh') {
+        // store.dispatch('saveLanguage', zhCn)
+        localeLanguage.value = name
+      } else if (name === 'en') {
+        // store.dispatch("saveLanguage", en)
+        localeLanguage.value = name
+      }
+      console.log('获取当前语言包成功')
+    }
+  })
+}
+
+onMounted(() => {
+  setTimeout(() => {
+    // 要延时一下，初始化时数据库没初始化好，去读的话会出错！
+    getLanguage()
+  }, 100)
+})
 
 
 const userStatus = localStorage.getItem('userStatus')

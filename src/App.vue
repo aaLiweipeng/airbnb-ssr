@@ -2,7 +2,7 @@
  * @Descripttion: 页面架构
  * @Author: lwp
  * @Date: 2023-02-26 02:05:02
- * @LastEditTime: 2023-03-12 17:26:15
+ * @LastEditTime: 2023-03-13 02:32:14
 -->
 <script setup lang="ts">
 import { useRoute } from 'vue-router'
@@ -13,6 +13,8 @@ import commonHeader from './components/layout/commonHeader.vue'
 // import en from 'element-plus/lib/locale/lang/en'
 
 import { useI18n } from 'vue-i18n'
+import { onMounted } from 'vue'
+import airbnb from './db'
 const { locale: localeLanguage } = useI18n()
 // const changeLang = (language: any) => {
 //   localeLanguage.value = language.name
@@ -20,6 +22,19 @@ const { locale: localeLanguage } = useI18n()
 // }
 
 const route = useRoute()
+
+onMounted(() => {
+  // 初始化所有对象仓库
+  airbnb.airbnbDB.openStore({
+    ...airbnb.languageObjectStore
+    // ...airbnb.userObjectStore,
+    // ...airbnb.orderObjectStore,
+    // ...airbnb.recordObjectStore
+  }).then((res: any) => {
+    console.log('初始化所有对象仓库', res)
+  })
+})
+
 </script>
 
 <template>
