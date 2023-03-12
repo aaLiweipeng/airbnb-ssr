@@ -123,6 +123,7 @@ export default class DB {
   }
 
   // 删除数据【数据字段意义 同上】
+  // key 为 数据行id
   deleteItem(storeName: string, key: number | string) {
     const store = this.db.transaction([storeName], 'readwrite').objectStore(storeName)
 

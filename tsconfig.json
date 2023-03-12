@@ -21,6 +21,7 @@
       "@style/*": ["src/style/*"],
       "@utils/*": ["src/utils/*"],
       "@assets/*": ["src/assets/*"],
+      "@db/*": ["src/db/*"],
       "@router/*": ["src/router/*"]
     }
   },
