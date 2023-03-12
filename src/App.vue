@@ -1,7 +1,15 @@
+<!--
+ * @Descripttion: 页面架构
+ * @Author: lwp
+ * @Date: 2023-02-26 02:05:02
+ * @LastEditTime: 2023-03-12 17:26:15
+-->
 <script setup lang="ts">
-import { useRouter } from 'vue-router'
-import HelloWorld from './components/HelloWorld.vue'
+import { useRoute } from 'vue-router'
+import commonHeader from './components/layout/commonHeader.vue'
+// import commonFooter from './components/layout/commonFooter.vue'
 // import zhCn from 'element-plus/lib/locale/lang/zh-cn'
+// import zh from './language/zh'
 // import en from 'element-plus/lib/locale/lang/en'
 
 import { useI18n } from 'vue-i18n'
@@ -11,41 +19,27 @@ const { locale: localeLanguage } = useI18n()
 //   console.log('language：', language)
 // }
 
-const router = useRouter()
+const route = useRoute()
 </script>
 
 <template>
-  <el-config-provider :locale=localeLanguage>
-    <div>
-      <a href="https://vitejs.dev" target="_blank">
-        <img src="/vite.svg" class="logo" alt="Vite logo" />
-      </a>
-    </div>
-
-    <!-- 触发路由（router-view）切换方式1 -->
-    <button @click="() => router.push({path: '/home' })">首页</button>
-    <button @click="() => router.push({ path: '/mine'})">个人中心</button>
-
-    <!-- 触发路由（router-view）切换方式2 -->
-    <router-link to="/home">首页</router-link>
-    <router-link to="/mine">个人中心</router-link>
-
-    <router-view />
-    <HelloWorld msg="Vite + Vue" />
+  <!-- <el-config-provider :locale="store.state.locale"> -->
+  <el-config-provider :locale="localeLanguage">
+    <!-- 头部 -->
+    <commonHeader v-show="route.fullPath.indexOf('login') === -1" />
+    <!-- 主体 -->
+    <!-- <div class="container">
+      <router-view />
+    </div> -->
+    <!-- 底部 -->
+    <!-- <commonFooter v-show="route.fullPath.indexOf('login') === -1" /> -->
   </el-config-provider>
 </template>
 
 <style scoped>
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.vue:hover {
-  filter: drop-shadow(0 0 2em #42b883aa);
+#app {
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 </style>

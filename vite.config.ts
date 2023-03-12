@@ -2,7 +2,7 @@
  * @Descripttion: 
  * @Author: lwp
  * @Date: 2023-02-26 02:05:02
- * @LastEditTime: 2023-03-08 05:54:13
+ * @LastEditTime: 2023-03-12 17:09:36
  */
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
@@ -28,7 +28,7 @@ export default defineConfig({
   css: {
     preprocessorOptions: {
       scss: {
-        additionalData: '@import "@/assets/scss/variable.scss";',
+        additionalData: '@import "@/assets/scss/variable.scss";@import "@/assets/scss/main.scss";',
       },
       // styl: {
       //   additionalData: `$injectedColor ?= orange`,
