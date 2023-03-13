@@ -113,6 +113,7 @@ const footerMenu = reactive(
             v-for="(itemInner, indexInner) in item.menus"
             :key="indexInner"
           >{{ t(`footer['${itemInner.name}']`) }}</a>
+          <!-- t函数结合 动态字符串模板 -->
         </li>
       </ul>
       <div class="copy-right">@ 2022 Harry, Inc . All rights reserved.</div>

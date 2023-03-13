@@ -2,7 +2,7 @@
  * @Descripttion: 页面架构
  * @Author: lwp
  * @Date: 2023-02-26 02:05:02
- * @LastEditTime: 2023-03-13 03:31:08
+ * @LastEditTime: 2023-03-14 03:05:46
 -->
 <script setup lang="ts">
 import { useRoute } from 'vue-router'
@@ -43,9 +43,9 @@ onMounted(() => {
     <!-- 头部 -->
     <commonHeader v-show="route.fullPath.indexOf('login') === -1" />
     <!-- 主体 -->
-    <!-- <div class="container">
+    <div class="container">
       <router-view />
-    </div> -->
+    </div>
     <!-- 底部 -->
     <commonFooter v-show="route.fullPath.indexOf('login') === -1" />
   </el-config-provider>
