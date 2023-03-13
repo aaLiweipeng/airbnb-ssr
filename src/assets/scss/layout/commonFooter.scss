@@ -1,0 +1,30 @@
+.footer-common{
+  border-top: 1px solid #ccc;
+  .inner-footer{
+    @include main-wapper;
+    ul{
+      flex-direction: row;
+      @include flex-layout(row,space-between,flex-start); // 水平flex布局
+  
+      li{
+        @include flex-layout(column,space-between,flex-start);// 垂直flex布局
+        a{
+          color: #999;
+          text-decoration: none;
+          margin-bottom: 10px;
+          font-size: 14px;
+          &:hover{
+            text-decoration: underline;// hover下划线
+          }
+        }
+      }
+     }
+     .copy-right{
+      @include main-wapper;
+      text-align: center;
+      border-top: 1px solid #ccc;// 上顶一灰横线
+      padding: 30px 0;
+      color: #666;
+     }
+  }
+}

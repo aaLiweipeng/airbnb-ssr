@@ -2,12 +2,12 @@
  * @Descripttion: 页面架构
  * @Author: lwp
  * @Date: 2023-02-26 02:05:02
- * @LastEditTime: 2023-03-13 02:32:14
+ * @LastEditTime: 2023-03-13 03:31:08
 -->
 <script setup lang="ts">
 import { useRoute } from 'vue-router'
 import commonHeader from './components/layout/commonHeader.vue'
-// import commonFooter from './components/layout/commonFooter.vue'
+import commonFooter from './components/layout/commonFooter.vue'
 // import zhCn from 'element-plus/lib/locale/lang/zh-cn'
 // import zh from './language/zh'
 // import en from 'element-plus/lib/locale/lang/en'
@@ -47,7 +47,7 @@ onMounted(() => {
       <router-view />
     </div> -->
     <!-- 底部 -->
-    <!-- <commonFooter v-show="route.fullPath.indexOf('login') === -1" /> -->
+    <commonFooter v-show="route.fullPath.indexOf('login') === -1" />
   </el-config-provider>
 </template>
 
