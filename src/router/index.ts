@@ -1,5 +1,13 @@
+/*
+ * @Descripttion: 
+ * @Author: lwp
+ * @Date: 2023-02-26 17:39:38
+ * @LastEditTime: 2023-03-19 00:12:06
+ */
 import home from '@/views/home/index.vue'
 import mine from '@/views/mine/index.vue'
+import login from '@/views/login/loginIndex.vue'
+
 import {
   createRouter,
   createMemoryHistory,
@@ -30,6 +38,17 @@ const routes = [
       description: "",
       keepAlive: false,
     },
+  },
+  {
+    path: '/login',
+    name: 'login',
+    component: login,
+    meta: {
+      title: '',
+      keywords: '',
+      description: '',
+      keepAlive: false
+    }
   },
 ];
 

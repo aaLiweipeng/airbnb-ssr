@@ -32,12 +32,12 @@ function handleSelect(e: SelectEventKey) {
     saveLanguageApi(en.name)
   //   store.dispatch("saveLanguage", en)
     localeLanguage.value = e
+  } else if (e === 'login') {
+    router.push({ name: 'login' })
+  } else if (e === 'logout') {
+    // userLogout()
   } 
-  // else if (e === 'login') {
-  //   router.push({ name: 'login' })
-  // } else if (e === 'logout') {
-  //   // userLogout()
-  // } else if (e === 'orders') {
+  // else if (e === 'orders') {
   //   store.commit('setOrderVisible', true)
   // } else if (e === 'records') {
   //   router.push({ name: 'record' })
@@ -132,6 +132,7 @@ function userLogout() {
       <!-- <el-menu-item index="logout" v-if="store.state.userStatus === 1">{{ t("login.logout") }}</el-menu-item> -->
   
       <!-- <el-menu-item index="login" v-else>{{ t("login.loginTab") }}/{{ t("login.signTab") }}</el-menu-item> -->
+      <el-menu-item index="login">{{ t("login.loginTab") }}/{{ t("login.signTab") }}</el-menu-item>
     </el-menu>
   </div>
 </template>

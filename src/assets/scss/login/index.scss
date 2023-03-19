@@ -1,0 +1,73 @@
+.login-page{
+  @include flex-layout(row);
+  height: 100vh;
+  .left-part{
+    flex:3;
+    height:100%;
+    background-image:url(../../images/login/bg.png);
+    background-repeat: no-repeat;
+    background-position: 60% center;
+    background-size: cover;
+  }
+  .right-part{
+    flex:2;
+    @include flex-layout(row,center,center);
+    .login-panel{
+      width: 300px;
+      .el-tabs__header{
+        margin-bottom: 45px;
+      }
+      .el-tabs__nav-scroll{
+        width: 100%;
+        margin: 0 auto;
+        .el-tabs__nav{
+          float: initial;
+          text-align: center; // tab栏 居中
+        }
+      }
+      .el-input__wrapper{
+        box-shadow: 0 0;
+      }
+      .el-input__inner{
+        height: 44px;
+        line-height: 42px;
+        background: #F6F6F8;
+        border-radius: 40px;
+        border: none;
+        padding: 0px 20px 0px 20px
+      }
+      .el-tabs__nav-wrap::after{
+        display: none;
+      }
+      .el-tabs__item{
+        font-size: 16px; // tab栏的item
+        color: #999;
+        &.is-active{
+          color: $orange;
+        }
+      }
+      .el-tabs__active-bar{
+        background-color:$orange;
+      }
+      .el-form-item__error{
+        left: 15px;
+      }
+    }
+  
+    .login-btn{
+      &.el-button{
+          display: block;
+          padding: 0;
+          margin-top: 45px;
+          width: 100%;
+          border: none;
+          line-height: 40px;
+          height: 40px;
+          border-radius: 20px;
+          background-color: $orange;
+          color: #fff;
+          font-size: 16px;
+      }
+    }
+  }
+}
