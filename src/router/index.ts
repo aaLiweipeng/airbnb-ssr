@@ -2,11 +2,12 @@
  * @Descripttion: 
  * @Author: lwp
  * @Date: 2023-02-26 17:39:38
- * @LastEditTime: 2023-03-19 00:12:06
+ * @LastEditTime: 2023-03-20 06:24:19
  */
 import home from '@/views/home/index.vue'
 import mine from '@/views/mine/index.vue'
 import login from '@/views/login/loginIndex.vue'
+import airbnb from '@/db' // 引入数据库和对象仓库
 
 import {
   createRouter,
@@ -56,5 +57,18 @@ const router =  createRouter({
   history: createWebHistory(),
   routes
 });
+
+router.beforeEach((to, from, next) => {
+  airbnb.airbnbDB.openStore({
+    ...airbnb.languageObjectStore,
+    ...airbnb.userObjectStore,
+    // ...airbnb.orderObjectStore,
+    // ...airbnb.recordObjectStore
+  }).then((res: any) => {
+    console.log('初始化所有对象仓库', res)
+    // localStorage.getItem('userId') && store.commit('setUserStatus', 1)
+    next()
+  })
+})
 
 export default router

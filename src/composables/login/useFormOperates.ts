@@ -3,7 +3,7 @@ import { IResultOr } from '@/api/interface'
 import { getCurrentInstance } from 'vue'
 // import { useStore } from '@/store'
 import { Router, useRoute } from 'vue-router'
-interface IRuleForm {
+export interface IRuleForm {
   mobile: string,
   password: string
 }
