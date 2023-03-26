@@ -2,7 +2,7 @@
  * @Descripttion: 页面架构
  * @Author: lwp
  * @Date: 2023-02-26 02:05:02
- * @LastEditTime: 2023-03-26 17:12:05
+ * @LastEditTime: 2023-03-26 23:07:04
 -->
 <script setup lang="ts">
 import { useRoute } from 'vue-router'
@@ -12,16 +12,18 @@ import commonFooter from './components/layout/commonFooter.vue'
 // import zh from './language/zh'
 // import en from 'element-plus/lib/locale/lang/en'
 
-import { useI18n } from 'vue-i18n'
+// import { useI18n } from 'vue-i18n'
 import { onMounted } from 'vue'
 import airbnb from './db'
-const { locale: localeLanguage } = useI18n()
+import { useStore } from '@/store'
+// const { locale: localeLanguage } = useI18n()
 // const changeLang = (language: any) => {
 //   localeLanguage.value = language.name
 //   console.log('language：', language)
 // }
 
 const route = useRoute()
+const store = useStore()
 
 onMounted(() => {
   // 初始化所有对象仓库
@@ -38,8 +40,8 @@ onMounted(() => {
 </script>
 
 <template>
-  <!-- <el-config-provider :locale="store.state.locale"> -->
-  <el-config-provider :locale="localeLanguage">
+  <!-- <el-config-provider :locale="localeLanguage"> -->
+  <el-config-provider :locale="store.state.locale">
     <!-- 头部 -->
     <commonHeader v-show="route.fullPath.indexOf('login') === -1" />
     <!-- 主体 -->

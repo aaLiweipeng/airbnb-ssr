@@ -2,12 +2,12 @@
  * @Descripttion: 封装登录模块的业务层逻辑
  * @Author: lwp
  * @Date: 2023-02-26 17:39:38
- * @LastEditTime: 2023-03-26 17:44:27
+ * @LastEditTime: 2023-03-26 23:03:27
  */
 import { IResultOr } from '@/api/interface'
 import { userSignApi, userLoginApi } from '@/api/login'
 import { getCurrentInstance } from 'vue'
-// import { useStore } from '@/store'
+import { useStore } from '@/store'
 import { Router, useRoute } from 'vue-router'
 import { UserFormType } from './useFormProperties'
 
@@ -27,7 +27,7 @@ interface Result {
  */
 export default function useFormOperates(router: Router, params: UserFormType): Result {
   const { proxy }: any = getCurrentInstance()
-  // const store = useStore()
+  const store = useStore()
   const route = useRoute()
 
   // 注册接口 的业务封装
@@ -53,8 +53,8 @@ export default function useFormOperates(router: Router, params: UserFormType): R
         const { status, userId } = result
 
         localStorage.setItem('userId', userId)
-        // store.commit('setUserStatus', status)
-        localStorage.setItem('userStatus', '1')
+        store.commit('setUserStatus', status)
+        // localStorage.setItem('userStatus', '1')
 
         const { redirect }: any = route.query
         console.log(redirect)

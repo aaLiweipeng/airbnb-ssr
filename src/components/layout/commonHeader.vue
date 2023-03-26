@@ -1,38 +1,39 @@
 <script setup lang="ts">
-import { ref, getCurrentInstance, defineAsyncComponent, onMounted } from 'vue'
+// import { ref, getCurrentInstance, defineAsyncComponent, onMounted } from 'vue'
+import { ref, getCurrentInstance, onMounted } from 'vue'
 import zhCn from 'element-plus/lib/locale/lang/zh-cn.js'
 import en from 'element-plus/lib/locale/lang/en.js'
-import { fetchLanguageApi, saveLanguageApi } from '@/api/layout'
+import { fetchLanguageApi } from '@/api/layout'
 import { useI18n } from 'vue-i18n'
 import { useRouter } from 'vue-router'
 import { userLogoutApi } from '@/api/login'
 import { IResultOr } from '@/api/interface'
 // import { userLogoutApi } from '@/api/login'
 // import { IResultOr } from '@/api/interface'
-// import { useStore } from '@/store'
+import { useStore } from '@/store'
 
 // const OrderPopover = defineAsyncComponent(() => import('@/views/order/components/orderPopover.vue'))
 const { t, locale: localeLanguage } = useI18n()
 const router = useRouter()
 const { proxy }: any = getCurrentInstance()
 const activeIndex = ref('orders')
-// const store = useStore()
+const store = useStore()
 
 /* eslint-disable */
-const emit = defineEmits<{
-  (e: 'changeLang', language: any): void
-}>()
+// const emit = defineEmits<{
+//   (e: 'changeLang', language: any): void
+// }>()
 
 // 类型来自 el-menu 的 el-menu-item 的 index
 type SelectEventKey = 'zh' | 'en' | 'login' | 'logout' | 'orders' | 'records'
 function handleSelect(e: SelectEventKey) {
   if (e === 'zh') {
-    saveLanguageApi(zhCn.name)
-  //   store.dispatch('saveLanguage', zhCn)
+    // saveLanguageApi(zhCn.name)
+    store.dispatch('saveLanguage', zhCn)
     localeLanguage.value = e
   } else if (e === 'en') {
-    saveLanguageApi(en.name)
-  //   store.dispatch("saveLanguage", en)
+    // saveLanguageApi(en.name)
+    store.dispatch("saveLanguage", en)
     localeLanguage.value = e
   } else if (e === 'login') {
     router.push({ name: 'login' })
@@ -55,10 +56,10 @@ function getLanguage() {
   
     if (success) {
       if (name === 'zh') {
-        // store.dispatch('saveLanguage', zhCn)
+        store.dispatch('saveLanguage', zhCn)
         localeLanguage.value = name
       } else if (name === 'en') {
-        // store.dispatch("saveLanguage", en)
+        store.dispatch("saveLanguage", en)
         localeLanguage.value = name
       }
       console.log('获取当前语言包成功')
@@ -74,7 +75,7 @@ onMounted(() => {
 })
 
 // localStorage临时存储方案
-const userStatus = localStorage.getItem('userStatus')
+// const userStatus = localStorage.getItem('userStatus')
 // 登出接口
 function userLogout() {
   proxy.$message.success('demo')
@@ -85,8 +86,8 @@ function userLogout() {
       // 退出登录成功，跳到登录页
       router.push({ name: 'login' })
 
-      localStorage.setItem('userStatus', '0') // 这种方案需要刷新页面才能更新页面UI
-      // store.commit('setUserStatus', 0) // 用VueX方案，可以实现响应式刷新UI
+      // localStorage.setItem('userStatus', '0') // @ 这种方案，需要刷新页面才能更新页面UI！！！！
+      store.commit('setUserStatus', 0) // @ 用VueX方案，可以实现响应式刷新UI！！！！！
       localStorage.setItem('userId', '')
     } else {
       proxy.$message.error(message)
@@ -133,8 +134,8 @@ function userLogout() {
         <el-menu-item index="en">English</el-menu-item>
       </el-sub-menu>
   
-      <!-- <el-menu-item index="logout" v-if="store.state.userStatus === 1">{{ t("login.logout") }}</el-menu-item> -->
-      <el-menu-item index="logout" v-if="userStatus === '1'">{{ t("login.logout") }}</el-menu-item>
+      <!-- <el-menu-item index="logout" v-if="userStatus === '1'">{{ t("login.logout") }}</el-menu-item> -->
+      <el-menu-item index="logout" v-if="store.state.userStatus === 1">{{ t("login.logout") }}</el-menu-item>
   
       <el-menu-item index="login" v-else>{{ t("login.loginTab") }}/{{ t("login.signTab") }}</el-menu-item>
     </el-menu>
