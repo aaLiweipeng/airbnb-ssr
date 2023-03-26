@@ -5,6 +5,8 @@ import en from 'element-plus/lib/locale/lang/en.js'
 import { fetchLanguageApi, saveLanguageApi } from '@/api/layout'
 import { useI18n } from 'vue-i18n'
 import { useRouter } from 'vue-router'
+import { userLogoutApi } from '@/api/login'
+import { IResultOr } from '@/api/interface'
 // import { userLogoutApi } from '@/api/login'
 // import { IResultOr } from '@/api/interface'
 // import { useStore } from '@/store'
@@ -35,7 +37,7 @@ function handleSelect(e: SelectEventKey) {
   } else if (e === 'login') {
     router.push({ name: 'login' })
   } else if (e === 'logout') {
-    // userLogout()
+    userLogout()
   } 
   // else if (e === 'orders') {
   //   store.commit('setOrderVisible', true)
@@ -71,23 +73,25 @@ onMounted(() => {
   }, 100)
 })
 
-
+// localStorage临时存储方案
 const userStatus = localStorage.getItem('userStatus')
 // 登出接口
 function userLogout() {
   proxy.$message.success('demo')
-  // userLogoutApi().then((res: IResultOr) => {
-  //   const { success, message } = res
-  //   if (success) {
-  //     proxy.$message.success(message)
-  //     router.push({ name: 'login' })
-  //     // localStorage.setItem('userStatus', '0')
-  //     // store.commit('setUserStatus', 0)
-  //     localStorage.setItem('userId', '')
-  //   } else {
-  //     proxy.$message.error(message)
-  //   }
-  // })
+  userLogoutApi().then((res: IResultOr) => {
+    const { success, message } = res
+    if (success) {
+      proxy.$message.success(message)
+      // 退出登录成功，跳到登录页
+      router.push({ name: 'login' })
+
+      localStorage.setItem('userStatus', '0') // 这种方案需要刷新页面才能更新页面UI
+      // store.commit('setUserStatus', 0) // 用VueX方案，可以实现响应式刷新UI
+      localStorage.setItem('userId', '')
+    } else {
+      proxy.$message.error(message)
+    }
+  })
 }
 </script>
 
@@ -130,9 +134,9 @@ function userLogout() {
       </el-sub-menu>
   
       <!-- <el-menu-item index="logout" v-if="store.state.userStatus === 1">{{ t("login.logout") }}</el-menu-item> -->
+      <el-menu-item index="logout" v-if="userStatus === '1'">{{ t("login.logout") }}</el-menu-item>
   
-      <!-- <el-menu-item index="login" v-else>{{ t("login.loginTab") }}/{{ t("login.signTab") }}</el-menu-item> -->
-      <el-menu-item index="login">{{ t("login.loginTab") }}/{{ t("login.signTab") }}</el-menu-item>
+      <el-menu-item index="login" v-else>{{ t("login.loginTab") }}/{{ t("login.signTab") }}</el-menu-item>
     </el-menu>
   </div>
 </template>

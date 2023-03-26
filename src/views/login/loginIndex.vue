@@ -1,20 +1,20 @@
 <!--
- * @Descripttion: 登录页
+ * @Descripttion: 登录页【作V层】
  * @Author: lwp
  * @Date: 2023-03-14 03:27:45
- * @LastEditTime: 2023-03-19 18:42:11
+ * @LastEditTime: 2023-03-26 16:34:50
 -->
 <script setup lang="ts">
 import { useI18n } from 'vue-i18n'
 
 import { useRouter } from 'vue-router'
 import useFormProperties from '@/composables/login/useFormProperties'
-// import useFormOperates from '@/composables/login/useFormOperates'
+import useFormOperates from '@/composables/login/useFormOperates'
 
 const router = useRouter()
 const { t } = useI18n()
-const { ruleForm, loginText, ruleFormRef, activeName, rules } = useFormProperties(t)
-// const { userSign, userLogin } = useFormOperates(router, ruleForm)
+const { ruleForm, loginText, ruleFormRef, activeName, rules } = useFormProperties(t) // M层调用
+const { userSign, userLogin } = useFormOperates(router, ruleForm) // PC层调用 直接调用封装好的hook，无需多言
 
 // tabClick回调，切换时更替按钮文本
 function handleClick(e: any) {
@@ -27,9 +27,9 @@ function submitForm() {
     if (valid) {
       // 校验成功
       if (activeName.value === 'sign') {
-        // userSign()
+        userSign() // 一行即可
       } else if (activeName.value === 'login') {
-        // userLogin()
+        userLogin()
       }
     } else {
       return false

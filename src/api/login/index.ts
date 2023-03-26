@@ -1,15 +1,21 @@
+/*
+ * @Descripttion: 登录模块IndexDB接口
+ * @Author: lwp
+ * @Date: 2023-02-26 17:39:38
+ * @LastEditTime: 2023-03-26 17:55:34
+ */
 // code: '000000'表示'操作成功'；code: '000001'表示'数据已存在'；code: '000002'表示'密码不正确'；
 // code: '000003'表示'手机号不正确'；code: '000004'表示'其他异常'；code: '000005'表示'登录过期'；
 import { ElLoading } from 'element-plus'
 import { IResultOr } from '../interface'
 import { getQueryCookie } from '@/utils/util'
 import airbnb from '@/db' // 引入数据库和对象仓库
-import { IRuleForm } from '@/composables/login/useFormOperates'
+import { UserFormType } from '@/composables/login/useFormProperties'
 
 const userStoreName = Object.keys(airbnb.userObjectStore)[0]
 
 // mock接口：用户注册
-export async function userSignApi(params: any) {
+export async function userSignApi(params: UserFormType) {
   const loading = ElLoading.service({
     lock: true,
     background: 'rgba(0, 0, 0, 0.1)'
@@ -52,8 +58,10 @@ export async function userSignApi(params: any) {
   return result
 }
 
-// mock接口：用户登录
-export async function userLoginApi(params: IRuleForm) {
+// mock接口：用户登录  
+// 模拟了【request请求】【请求响应的数据整理、返回】两部分的逻辑 ！！！
+// 搞得外面只需传入数据，即可拿到结果字段
+export async function userLoginApi(params: UserFormType) {
   const loading = ElLoading.service({
     lock: true,
     background: 'rgba(0, 0, 0, 0.1)'
@@ -76,6 +84,7 @@ export async function userLoginApi(params: IRuleForm) {
       })
       // 其他
       resolve({ code: '000004' })
+      loading.close()
     })
   })
 
@@ -151,7 +160,7 @@ export async function userLogoutApi() {
       })
     })
   
-    // 清空user的token，状态status置0，退出登录
+    // 清空user的token，状态status置0，退出登录!
     const obj = { status: 0, token: null }
     Object.assign(params, obj)
     result = await new Promise((resolve, reject) => {

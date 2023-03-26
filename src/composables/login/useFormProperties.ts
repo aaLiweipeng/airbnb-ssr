@@ -1,17 +1,17 @@
 /*
- * @Descripttion: 
+ * @Descripttion: 登录模块 Model层hook封装
  * @Author: lwp
  * @Date: 2023-03-18 23:59:08
- * @LastEditTime: 2023-03-19 18:44:33
+ * @LastEditTime: 2023-03-26 20:09:33
  */
 import { ref, reactive, Ref } from 'vue'
 // 表单值 绑定对象的类型
-interface IRuleForm {
+export interface UserFormType {
   mobile: string,
   password: string
 }
 
-// 表单校验值的类型
+// 表单校验规则 类型
 interface IRuleItem {
   required: boolean;
   min?: number;
@@ -24,12 +24,12 @@ interface IRules {
   password: IRuleItem[]
 }
 
-// 本定义函数的返回结果
+// 本定义函数的返回结果。所有model字段
 interface Result {
   activeName: Ref<string>, // 响应式字符串字段，用于存储tab的变量
   loginText: Ref<string>, // 响应式字符串字段，用于 登录button的显示
   ruleFormRef: any,
-  ruleForm: IRuleForm,
+  ruleForm: UserFormType,
   rules: IRules
 }
 

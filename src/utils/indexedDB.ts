@@ -85,7 +85,7 @@ export default class DB {
   
             // 创建对象仓库成功 的 回调
             store.transaction.oncomplete = (e: any) => {
-              console.log('创建对象仓库成功')
+              console.log(`创建对象仓库 ${storeName} 成功`)
             }
           }
         }

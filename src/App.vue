@@ -2,7 +2,7 @@
  * @Descripttion: 页面架构
  * @Author: lwp
  * @Date: 2023-02-26 02:05:02
- * @LastEditTime: 2023-03-14 03:05:46
+ * @LastEditTime: 2023-03-26 17:12:05
 -->
 <script setup lang="ts">
 import { useRoute } from 'vue-router'
@@ -26,8 +26,8 @@ const route = useRoute()
 onMounted(() => {
   // 初始化所有对象仓库
   airbnb.airbnbDB.openStore({
-    ...airbnb.languageObjectStore
-    // ...airbnb.userObjectStore,
+    ...airbnb.languageObjectStore,
+    ...airbnb.userObjectStore
     // ...airbnb.orderObjectStore,
     // ...airbnb.recordObjectStore
   }).then((res: any) => {

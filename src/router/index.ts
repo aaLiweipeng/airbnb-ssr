@@ -2,7 +2,7 @@
  * @Descripttion: 
  * @Author: lwp
  * @Date: 2023-02-26 17:39:38
- * @LastEditTime: 2023-03-20 06:24:19
+ * @LastEditTime: 2023-03-26 17:38:05
  */
 import home from '@/views/home/index.vue'
 import mine from '@/views/mine/index.vue'
@@ -18,7 +18,7 @@ import {
 
 const routes = [
   {
-    path: "/home",
+    path: "/",
     name: "home",
     component: home,
     meta: {
